@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Button, StyleSheet, TextInput, View } from "react-native";
+import { Button, Image, StyleSheet, TextInput, View } from "react-native";
 import colors from "../constants/colors";
-
+const Logo = require("../../assets/logo.png");
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,6 +12,7 @@ const LoginScreen = () => {
 
   return (
     <View style={styles.container}>
+      <Image style={styles.logo} source={Logo} />
       <TextInput placeholder="Email" value={email} onChangeText={setEmail} />
       <TextInput
         placeholder="Password"
@@ -26,9 +27,13 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
     backgroundColor: colors.lightBlue,
+  },
+
+  logo: {
+    width: "100%",
+    height: 116,
+    objectFit: "contain",
   },
 });
 
