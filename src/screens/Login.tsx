@@ -2,17 +2,27 @@ import { Image, Linking, StyleSheet, View } from "react-native";
 import colors from "../constants/colors";
 import PoppinsText from "../components/PoppinsText";
 import PrimaryButton from "../components/PrimaryButton";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+import RootStackParamList from "../navigation/RootStackParamList.type";
 
 const Logo = require("../../assets/logo.png");
 const Icon = require("../../assets/app-icon.png");
 
-const LoginScreen = () => {
+interface LoginScreenProps {
+  navigation: NavigationProp<RootStackParamList, "Login">;
+}
+
+const LoginScreen = ({ navigation }: LoginScreenProps) => {
   const handleTermsPress = () => {
     Linking.openURL("https://www.example.com/terms");
   };
 
   const handlePrivacyPress = () => {
     Linking.openURL("https://www.example.com/privacy");
+  };
+
+  const handleButtonPress = () => {
+    navigation.navigate("MainScreen");
   };
 
   return (
@@ -26,7 +36,7 @@ const LoginScreen = () => {
           Welcome to the best YouTube-based learning application.
         </PoppinsText>
 
-        <PrimaryButton onPress={null} title="Log in as guest" />
+        <PrimaryButton onPress={handleButtonPress} title="Log in as guest" />
 
         <PoppinsText style={styles.agreementText}>
           By continuing you agree with{"  \n"}
