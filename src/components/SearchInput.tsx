@@ -1,17 +1,22 @@
 import { colors } from "@constants";
 import { StyleSheet, TextInput, View } from "react-native";
-
 import SearchIcon from "@assets/icons/search-icon.svg";
-import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, setSearchText } from "@store";
 
 export const SearchInput = () => {
-  const [searchText, setSearchText] = useState("");
+  const dispatch = useDispatch();
+  const searchText = useSelector((state: RootState) => state.search.searchText);
+
+  const handleChangeText = (text: string) => {
+    dispatch(setSearchText(text));
+  };
 
   return (
     <View style={styles.searchInputContainer}>
       <SearchIcon width={24} height={24} />
       <TextInput
-        onChangeText={setSearchText}
+        onChangeText={handleChangeText}
         style={styles.input}
         value={searchText}
         placeholder="Search videos"
