@@ -2,7 +2,7 @@ import React from "react";
 import { Text, TextProps } from "react-native";
 
 interface PoppinsTextProps extends TextProps {
-  weight:
+  weight?:
     | "Black"
     | "BlackItalic"
     | "Bold"
@@ -25,7 +25,7 @@ interface PoppinsTextProps extends TextProps {
 
 const PoppinsText: React.FC<PoppinsTextProps> = ({
   style,
-  weight,
+  weight = "Regular",
   ...props
 }) => {
   return (
