@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import screenOptions from "./screenOption";
 import LoginScreen from "../screens/Login";
 import RootStackParamList from "./RootStackParamList.type";
+import MainScreen from "../screens/Main";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -11,6 +12,7 @@ const Navigation = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={screenOptions}>
         <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="MainScreen" component={MainScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

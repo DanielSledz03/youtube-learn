@@ -2,7 +2,7 @@ import { Image, Linking, StyleSheet, View } from "react-native";
 import colors from "../constants/colors";
 import PoppinsText from "../components/PoppinsText";
 import PrimaryButton from "../components/PrimaryButton";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { NavigationProp } from "@react-navigation/native";
 import RootStackParamList from "../navigation/RootStackParamList.type";
 
 const Logo = require("../../assets/logo.png");
