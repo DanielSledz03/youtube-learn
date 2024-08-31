@@ -23,7 +23,7 @@ function App() {
     <SafeAreaView
       style={{ flex: 1, paddingTop: Platform.OS === "android" ? 50 : 0 }}
     >
-      <StatusBar backgroundColor="rgba(43, 45, 66, 1)" style="auto" />
+      <StatusBar style="light" />
       <Navigation />
     </SafeAreaView>
   );
