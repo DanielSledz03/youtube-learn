@@ -1,6 +1,6 @@
 import { PoppinsText } from "@components";
 import { colors } from "@constants";
-import React from "react";
+import { useYouTubeSearch } from "@hooks";
 import {
   View,
   Text,
@@ -8,25 +8,49 @@ import {
   FlatList,
   StyleSheet,
   Dimensions,
+  ActivityIndicator,
 } from "react-native";
 
 interface CardData {
   id: string;
   title: string;
-  description: string;
   date: string;
   imageUrl: string;
 }
 
 interface HorizontalScrollCardsProps {
   title: string;
-  data: CardData[];
 }
 
 const HorizontalScrollCards: React.FC<HorizontalScrollCardsProps> = ({
-  data,
   title,
 }) => {
+  const { results, loading, error } = useYouTubeSearch(title);
+
+  // Transform results from YouTube API to match CardData structure
+  const data: CardData[] = results.map((item) => ({
+    id: item.id.videoId,
+    title:
+      item.snippet.title.length > 50
+        ? item.snippet.title.slice(0, 50) + "..."
+        : item.snippet.title,
+    description: item.snippet.description,
+    date: new Date(item.snippet.publishedAt).toLocaleDateString("pl-PL"), // Formatowanie daty na DD.MM.YYYY
+    imageUrl: item.snippet.thumbnails.high.url,
+  }));
+
+  if (loading) {
+    return <ActivityIndicator size="large" color={colors.black} />;
+  }
+
+  if (error) {
+    return (
+      <View style={styles.container}>
+        <Text style={{ color: "red" }}>{error}</Text>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -47,9 +71,12 @@ const HorizontalScrollCards: React.FC<HorizontalScrollCardsProps> = ({
         renderItem={({ item }) => (
           <View style={styles.card}>
             <Image source={{ uri: item.imageUrl }} style={styles.image} />
-            <Text style={styles.title}>{item.title}</Text>
-            <Text style={styles.description}>{item.description}</Text>
-            <Text style={styles.date}>{item.date}</Text>
+            <PoppinsText weight="Medium" style={styles.title}>
+              {item.title}
+            </PoppinsText>
+            <PoppinsText weight="Regular" style={styles.date}>
+              {item.date}
+            </PoppinsText>
           </View>
         )}
       />
@@ -94,20 +121,17 @@ const styles = StyleSheet.create({
     borderRadius: 16,
   },
   title: {
-    fontSize: 18,
-    fontWeight: "bold",
-    padding: 10,
-    color: "#333",
-  },
-  description: {
-    fontSize: 14,
-    color: "#555",
-    paddingHorizontal: 10,
-  },
-  date: {
     fontSize: 12,
-    color: "#999",
-    padding: 10,
+    fontWeight: "bold",
+    color: colors.darkBlue,
+    marginTop: 10,
+  },
+
+  date: {
+    fontSize: 10,
+    color: colors.darkBlue,
+    marginTop: 5,
+    textAlign: "right",
   },
 
   heading: {
