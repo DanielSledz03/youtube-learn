@@ -1,39 +1,86 @@
-import { useState } from "react";
-import { Button, Image, StyleSheet, TextInput, View } from "react-native";
+import { Image, Linking, StyleSheet, View } from "react-native";
 import colors from "../constants/colors";
-const Logo = require("../../assets/logo.png");
-const LoginScreen = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+import PoppinsText from "../components/PoppinsText";
+import PrimaryButton from "../components/PrimaryButton";
 
-  const handleLogin = () => {
-    // Login logic here
+const Logo = require("../../assets/logo.png");
+const Icon = require("../../assets/app-icon.png");
+
+const LoginScreen = () => {
+  const handleTermsPress = () => {
+    Linking.openURL("https://www.example.com/terms");
+  };
+
+  const handlePrivacyPress = () => {
+    Linking.openURL("https://www.example.com/privacy");
   };
 
   return (
-    <View style={styles.container}>
-      <Image style={styles.logo} source={Logo} />
-      <TextInput placeholder="Email" value={email} onChangeText={setEmail} />
-      <TextInput
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-      />
-      <Button title="Login" onPress={handleLogin} />
+    <View style={styles.screenContainer}>
+      <Image style={styles.logoImage} source={Logo} />
+
+      <Image source={Icon} />
+
+      <View style={styles.contentContainer}>
+        <PoppinsText weight="SemiBold" style={styles.welcomeText}>
+          Welcome to the best YouTube-based learning application.
+        </PoppinsText>
+
+        <PrimaryButton onPress={null} title="Log in as guest" />
+
+        <PoppinsText style={styles.agreementText}>
+          By continuing you agree with{"  \n"}
+          <PoppinsText onPress={handleTermsPress} style={styles.linkText}>
+            Terms and Conditions
+          </PoppinsText>{" "}
+          and{" "}
+          <PoppinsText onPress={handlePrivacyPress} style={styles.linkText}>
+            Privacy Policy
+          </PoppinsText>
+        </PoppinsText>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  screenContainer: {
     flex: 1,
     backgroundColor: colors.lightBlue,
+    paddingHorizontal: 30,
+    paddingVertical: 50,
+    alignItems: "center",
+    justifyContent: "space-between",
   },
 
-  logo: {
+  logoImage: {
     width: "100%",
     height: 116,
-    objectFit: "contain",
+    resizeMode: "contain",
+  },
+
+  contentContainer: {
+    width: "100%",
+    alignItems: "center",
+  },
+
+  welcomeText: {
+    width: "100%",
+    color: colors.white,
+    fontSize: 22,
+    lineHeight: 24,
+  },
+
+  agreementText: {
+    fontSize: 13,
+    lineHeight: 16,
+    color: colors.white,
+    textAlign: "center",
+  },
+
+  linkText: {
+    color: colors.darkBlue,
+    textDecorationLine: "underline",
   },
 });
 
