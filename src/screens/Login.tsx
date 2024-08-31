@@ -1,9 +1,9 @@
 import { Image, Linking, StyleSheet, View } from "react-native";
 import colors from "../constants/colors";
-import PoppinsText from "../components/PoppinsText";
-import PrimaryButton from "../components/PrimaryButton";
+
 import { NavigationProp } from "@react-navigation/native";
-import RootStackParamList from "../navigation/RootStackParamList.type";
+import { PoppinsText, PrimaryButton } from "@components";
+import { RootStackParamList } from "@navigation";
 
 const Logo = require("../../assets/logo.png");
 const Icon = require("../../assets/app-icon.png");
@@ -12,7 +12,7 @@ interface LoginScreenProps {
   navigation: NavigationProp<RootStackParamList, "Login">;
 }
 
-const LoginScreen = ({ navigation }: LoginScreenProps) => {
+export const LoginScreen = ({ navigation }: LoginScreenProps) => {
   const handleTermsPress = () => {
     Linking.openURL("https://www.example.com/terms");
   };
@@ -93,5 +93,3 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline",
   },
 });
-
-export default LoginScreen;

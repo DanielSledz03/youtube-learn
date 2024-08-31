@@ -1,5 +1,5 @@
 import { StyleSheet, TouchableOpacity } from "react-native";
-import PoppinsText from "./PoppinsText";
+import { PoppinsText } from "./PoppinsText";
 import colors from "../constants/colors";
 
 interface PrimaryButtonProps {
@@ -7,7 +7,7 @@ interface PrimaryButtonProps {
   onPress: () => void;
 }
 
-const PrimaryButton = ({ title, ...props }: PrimaryButtonProps) => {
+export const PrimaryButton = ({ title, ...props }: PrimaryButtonProps) => {
   return (
     <TouchableOpacity style={styles.container} {...props}>
       <PoppinsText style={styles.text} weight="SemiBold">
@@ -33,5 +33,3 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
-
-export default PrimaryButton;

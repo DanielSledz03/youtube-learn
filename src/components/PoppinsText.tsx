@@ -23,7 +23,7 @@ interface PoppinsTextProps extends TextProps {
     | "ThinItalic";
 }
 
-const PoppinsText: React.FC<PoppinsTextProps> = ({
+export const PoppinsText: React.FC<PoppinsTextProps> = ({
   style,
   weight = "Regular",
   ...props
@@ -32,5 +32,3 @@ const PoppinsText: React.FC<PoppinsTextProps> = ({
     <Text style={[style, { fontFamily: `Poppins-${weight}` }]} {...props} />
   );
 };
-
-export default PoppinsText;

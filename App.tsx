@@ -1,13 +1,10 @@
 import { useEffect } from "react";
 import { Platform, SafeAreaView } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import LoginScreen from "./src/screens/Login";
-import screenOptions from "./src/navigation/screenOption";
+
 import { StatusBar } from "expo-status-bar";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import Navigation from "./src/navigation/Navigation";
+import { Navigation } from "@navigation";
 
 function App() {
   const [loaded, error] = useFonts({
