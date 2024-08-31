@@ -18,7 +18,8 @@
       "@components": ["src/components"],
       "@screens": ["src/screens"],
       "@stores": ["src/stores"],
-      "@assets": ["assets"]
+      "@assets": ["assets"],
+      "@constants": ["src/constants"]
     }
   },
   "extends": "expo/tsconfig.base"

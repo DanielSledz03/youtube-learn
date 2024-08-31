@@ -9,15 +9,16 @@ module.exports = function (api) {
       [
         "module-resolver",
         {
-          root: ["./"], // Określa podstawowy katalog projektu
+          root: ["./"],
           alias: {
             "@navigation": "./src/navigation",
             "@components": "./src/components",
             "@screens": "./src/screens",
             "@stores": "./src/stores",
             "@assets": "./assets",
+            "@constants": "./src/constants",
           },
-          extensions: [".js", ".jsx", ".ts", ".tsx"], // Umożliwia rozpoznawanie plików z tymi rozszerzeniami
+          extensions: [".js", ".jsx", ".ts", ".tsx"],
         },
       ],
     ],

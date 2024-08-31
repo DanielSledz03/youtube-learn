@@ -1,4 +1,4 @@
-const colors = {
+export const colors = {
   white: "rgba(255, 255, 255, 1)",
   darkBlue: "rgba(43, 45, 66, 1)",
   lightBlue: "rgba(141, 153, 174, 1)",
@@ -11,5 +11,3 @@ const colors = {
   black: "rgba(0, 0, 0, 1)",
   semiTransparentWhite: "rgba(255, 255, 255, 0.1)",
 };
-
-export default colors;

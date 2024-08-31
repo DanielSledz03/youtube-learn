@@ -1,6 +1,6 @@
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { PoppinsText } from "./PoppinsText";
-import colors from "../constants/colors";
+import { colors } from "@constants";
 
 interface PrimaryButtonProps {
   title: string;

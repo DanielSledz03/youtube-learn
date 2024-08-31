@@ -1,9 +1,9 @@
 import { Image, Linking, StyleSheet, View } from "react-native";
-import colors from "../constants/colors";
 
 import { NavigationProp } from "@react-navigation/native";
 import { PoppinsText, PrimaryButton } from "@components";
 import { RootStackParamList } from "@navigation";
+import { colors } from "@constants";
 
 const Logo = require("../../assets/logo.png");
 const Icon = require("../../assets/app-icon.png");
