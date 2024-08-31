@@ -22,7 +22,7 @@ export const LoginScreen = ({ navigation }: LoginScreenProps) => {
   };
 
   const handleButtonPress = () => {
-    navigation.navigate("MainScreen");
+    navigation.navigate("Tabs");
   };
 
   return (
