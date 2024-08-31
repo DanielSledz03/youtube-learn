@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Button, TextInput, View } from "react-native";
+import { Button, StyleSheet, TextInput, View } from "react-native";
+import colors from "../constants/colors";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -10,7 +11,7 @@ const LoginScreen = () => {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <TextInput placeholder="Email" value={email} onChangeText={setEmail} />
       <TextInput
         placeholder="Password"
@@ -21,5 +22,14 @@ const LoginScreen = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: colors.lightBlue,
+  },
+});
 
 export default LoginScreen;
