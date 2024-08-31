@@ -17,7 +17,7 @@
       "@navigation": ["src/navigation"],
       "@components": ["src/components"],
       "@screens": ["src/screens"],
-      "@stores": ["src/stores"],
+      "@store": ["src/store"],
       "@assets/*": ["assets/*"],
       "@constants": ["src/constants"],
       "@hooks": ["src/hooks"],
