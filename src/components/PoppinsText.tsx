@@ -1,5 +1,6 @@
+import { colors } from "@constants";
 import React from "react";
-import { Text, TextProps } from "react-native";
+import { Text, TextProps, StyleSheet } from "react-native";
 
 interface PoppinsTextProps extends TextProps {
   weight?:
@@ -29,6 +30,15 @@ export const PoppinsText: React.FC<PoppinsTextProps> = ({
   ...props
 }) => {
   return (
-    <Text style={[style, { fontFamily: `Poppins-${weight}` }]} {...props} />
+    <Text
+      style={[styles.text, style, { fontFamily: `Poppins-${weight}` }]}
+      {...props}
+    />
   );
 };
+
+const styles = StyleSheet.create({
+  text: {
+    color: colors.darkBlue,
+  },
+});
