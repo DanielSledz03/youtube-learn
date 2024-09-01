@@ -3,23 +3,42 @@ import { StyleSheet, TextInput, View } from "react-native";
 import SearchIcon from "@assets/icons/search-icon.svg";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, setSearchText } from "@store";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { CombinedParamList } from "@navigation";
 
-export const SearchInput = () => {
+interface SearchInputProps {
+  searchScreen?: boolean;
+}
+
+export const SearchInput = ({ searchScreen = false }: SearchInputProps) => {
   const dispatch = useDispatch();
   const searchText = useSelector((state: RootState) => state.search.searchText);
+  const navigate = useNavigation<NavigationProp<CombinedParamList>>();
 
   const handleChangeText = (text: string) => {
     dispatch(setSearchText(text));
   };
 
+  const handleSubmit = () => {
+    if (!searchText) {
+      navigate.navigate("SearchScreen");
+    }
+  };
+
   return (
-    <View style={styles.searchInputContainer}>
+    <View
+      style={[
+        styles.searchInputContainer,
+        searchScreen ? { width: "100%" } : { width: "85%" },
+      ]}
+    >
       <SearchIcon width={24} height={24} />
       <TextInput
         onChangeText={handleChangeText}
         style={styles.input}
         value={searchText}
         placeholder="Search videos"
+        onSubmitEditing={handleSubmit}
       />
     </View>
   );
