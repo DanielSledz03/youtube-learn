@@ -1,6 +1,9 @@
 import { PoppinsText } from "@components";
 import { colors } from "@constants";
 import { useYouTubeSearch } from "@hooks";
+import { CombinedParamList } from "@navigation";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { setSearchText } from "@store";
 import {
   View,
   Text,
@@ -9,7 +12,9 @@ import {
   StyleSheet,
   Dimensions,
   ActivityIndicator,
+  TouchableOpacity,
 } from "react-native";
+import { useDispatch } from "react-redux";
 
 interface CardData {
   id: string;
@@ -26,21 +31,31 @@ const HorizontalScrollCards: React.FC<HorizontalScrollCardsProps> = ({
   title,
 }) => {
   const { results, loading, error } = useYouTubeSearch(title);
+  const dispatch = useDispatch();
+  const navigate = useNavigation<NavigationProp<CombinedParamList>>();
 
-  // Transform results from YouTube API to match CardData structure
+  const handleShowMore = () => {
+    dispatch(setSearchText(title));
+    navigate.navigate("SearchScreen");
+  };
+
   const data: CardData[] = results.map((item) => ({
-    id: item.id.videoId,
+    id: item.id.videoId || "",
     title:
       item.snippet.title.length > 50
         ? item.snippet.title.slice(0, 50) + "..."
         : item.snippet.title,
     description: item.snippet.description,
-    date: new Date(item.snippet.publishedAt).toLocaleDateString("pl-PL"), // Formatowanie daty na DD.MM.YYYY
+    date: new Date(item.snippet.publishedAt).toLocaleDateString("pl-PL"),
     imageUrl: item.snippet.thumbnails.high.url,
   }));
 
   if (loading) {
-    return <ActivityIndicator size="large" color={colors.black} />;
+    return (
+      <View style={styles.indicator}>
+        <ActivityIndicator size="large" color={colors.black} />
+      </View>
+    );
   }
 
   if (error) {
@@ -58,9 +73,11 @@ const HorizontalScrollCards: React.FC<HorizontalScrollCardsProps> = ({
           {title}
         </PoppinsText>
 
-        <PoppinsText weight="Regular" style={styles.showMore}>
-          Show more
-        </PoppinsText>
+        <TouchableOpacity onPress={handleShowMore}>
+          <PoppinsText weight="Regular" style={styles.showMore}>
+            Show more
+          </PoppinsText>
+        </TouchableOpacity>
       </View>
 
       <FlatList
@@ -69,7 +86,7 @@ const HorizontalScrollCards: React.FC<HorizontalScrollCardsProps> = ({
         showsHorizontalScrollIndicator={false}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <View style={styles.card}>
+          <View key={item.id} style={styles.card}>
             <Image source={{ uri: item.imageUrl }} style={styles.image} />
             <PoppinsText weight="Medium" style={styles.title}>
               {item.title}
@@ -123,19 +140,23 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 12,
     fontWeight: "bold",
-    color: colors.darkBlue,
     marginTop: 10,
   },
 
   date: {
     fontSize: 10,
-    color: colors.darkBlue,
     marginTop: 5,
     textAlign: "right",
   },
 
   heading: {
     fontSize: 18,
+  },
+
+  indicator: {
+    marginBottom: 300,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 
