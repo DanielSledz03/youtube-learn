@@ -39,8 +39,8 @@ const HorizontalScrollCards: React.FC<HorizontalScrollCardsProps> = ({
     navigate.navigate("SearchScreen");
   };
 
-  const data: CardData[] = results.map((item) => ({
-    id: item.id.videoId || "",
+  const data: CardData[] = results.map((item, index) => ({
+    id: item.id.videoId || `${item.snippet.title}-${index}`,
     title:
       item.snippet.title.length > 50
         ? item.snippet.title.slice(0, 50) + "..."
@@ -86,7 +86,7 @@ const HorizontalScrollCards: React.FC<HorizontalScrollCardsProps> = ({
         showsHorizontalScrollIndicator={false}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <View key={item.id} style={styles.card}>
+          <View style={styles.card}>
             <Image source={{ uri: item.imageUrl }} style={styles.image} />
             <PoppinsText weight="Medium" style={styles.title}>
               {item.title}

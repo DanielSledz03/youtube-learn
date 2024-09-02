@@ -26,8 +26,8 @@ interface VerticalScrollCardsProps {
 const VerticalScrollCards: React.FC<VerticalScrollCardsProps> = ({ title }) => {
   const { results, loading, error } = useYouTubeSearch(title);
 
-  const data: CardData[] = results.map((item) => ({
-    id: item.id.videoId || "",
+  const data: CardData[] = results.map((item, index) => ({
+    id: item.id.videoId || `${item.snippet.title}-${index}`,
     title:
       item.snippet.title.length > 50
         ? item.snippet.title.slice(0, 50) + "..."
@@ -117,7 +117,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     borderRadius: 8,
     overflow: "hidden",
-    elevation: 3,
   },
   image: {
     width: "100%",

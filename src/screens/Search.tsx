@@ -8,13 +8,13 @@ import VerticalScrollCards from "src/views/VerticalScrollCards";
 export const SearchScreen = () => {
   const searchText = useSelector((state: RootState) => state.search.searchText);
   return (
-    <ScrollView style={styles.screenContainer}>
+    <View style={styles.screenContainer}>
       <View style={styles.headerContainer}>
         <SearchInput searchScreen />
       </View>
 
       {searchText.length > 0 && <VerticalScrollCards title={searchText} />}
-    </ScrollView>
+    </View>
   );
 };
 
